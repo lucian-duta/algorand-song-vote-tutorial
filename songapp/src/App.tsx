@@ -20,7 +20,7 @@ function App() {
   });
 
   // CHANGE THIS TO YOUR APP ID
-  const app_address: number = 644438305;
+  const app_address: number = 646489223;
   // CHANGE THIS TO YOUR APP ID
 
   const baseServer = "https://testnet-api.algonode.cloud";

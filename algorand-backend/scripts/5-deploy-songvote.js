@@ -4,7 +4,7 @@ import { open, readFile } from "node:fs/promises";
 dotenv.config();
 const baseServer = "https://testnet-api.algonode.cloud";
 const algodClient = new algosdk.Algodv2('', baseServer, '');
-let myaccount = algosdk.mnemonicToSecretKey("imitate brief urban business taste favorite favorite evil attitude sauce goat forward pottery rescue obey clever afford join click duty person evil cinnamon abstract title");
+let myaccount = algosdk.mnemonicToSecretKey("kind noodle army west demise hamster cancel lunch process school curtain very wood basic shiver fitness holiday aunt allow alien true strike join ability era");
 let sender = myaccount.addr;
 async function compileProgram(client, TealSource) {
 let encoder = new TextEncoder();
