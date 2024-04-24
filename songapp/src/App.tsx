@@ -12,13 +12,17 @@ function App() {
   const [currentAccount, setCurrentAccount] = useState<string | null>();
   const [voteState1, setVoteState1] = useState("Vote");
   const [voteState2, setVoteState2] = useState("Vote");
+  const[voteState3,setVoteState3]=useState("Vote");
   const [Count1, setCount1] = useState(0);
   const [Count2, setCount2] = useState(0);
+  const[Count3,setCount3]=useState(0);
   const [walletbalance, setWalletBalance] = useState<number>(0);
   const [likes1, setLikes1] = useState(faker.datatype.number());
   const [dislikes1, setDislikes1] = useState(faker.datatype.number());
   const [likes2, setLikes2] = useState(faker.datatype.number());
   const [dislikes2, setDislikes2] = useState(faker.datatype.number());
+  const [likes3, setLikes3] = useState(faker.datatype.number());
+  const [dislikes3, setDislikes3] = useState(faker.datatype.number());
 
   const peraWallet = new PeraWalletConnect({
     // Default chainId is "4160"
@@ -150,6 +154,51 @@ function App() {
     }
     setVoteState2("Vote");
   };
+  const addC3 = async () => {
+    if (!currentAccount) {
+      console.log("Please connect wallet");
+      return;
+    }
+    let sender = currentAccount;
+    let appArgs = [];
+    appArgs.push(new Uint8Array(Buffer.from("AddC3")));
+    let params = await algodClient.getTransactionParams().do();
+    const txn = algosdk.makeApplicationNoOpTxn(
+      sender,
+      params,
+      app_address,
+      appArgs
+    );
+    let txId = txn.txID().toString();
+
+    // time to sign . . . which we have to do with walletconnect
+    const SignerTransaction = [{ txn }];
+
+    setVoteState3("Sign txn in wallet");
+
+    const result = await peraWallet.signTransaction([SignerTransaction]);
+
+    //const result = await connector.sendCustomRequest(request);
+    const decodedResult = result.map((element: any) => {
+      return element ? new Uint8Array(Buffer.from(element, "base64")) : null;
+    });
+    setVoteState3("Processing. . .");
+    await algodClient.sendRawTransaction(decodedResult as any).do();
+    await algosdk.waitForConfirmation(algodClient, txId, 2);
+    console.log("Adding to Count3");
+    let transactionResponse = await algodClient
+      .pendingTransactionInformation(txId)
+      .do();
+    console.log("Called app-id:", transactionResponse["txn"]["txn"]["apid"]);
+    if (transactionResponse["global-state-delta"] !== undefined) {
+      console.log(
+        "Global State updated:",
+        transactionResponse["global-state-delta"]
+      );
+      await getCount();
+    }
+    setVoteState3("Vote");
+  };
 
   const getBalance = async () => {
     if (!currentAccount) {
@@ -174,6 +223,8 @@ function App() {
     setCount1(globalState[0]["value"]["uint"]);
     console.log("Count2: ", globalState[1]["value"]["uint"]);
     setCount2(globalState[1]["value"]["uint"]);
+    console.log("Count3: ", globalState[2]["value"]["uint"]);
+    setCount3(globalState[2]["value"]["uint"]);
   };
 
   useEffect(() => {
@@ -197,6 +248,7 @@ function App() {
     getCount();
     setVoteState1("Vote");
     setVoteState2("Vote");
+    setVoteState3("Vote");
     getBalance();
     console.log("currentAccount:", currentAccount);
   }, [currentAccount]);
@@ -206,7 +258,7 @@ function App() {
       <div className="dataContainer">
         <div className="header">FAVOURITE PLAYER VOTING </div>
         <div className="bio">
-          Vote for your favourite football player.This is fanpage voting vote via using{" "}
+          Vote for your favourite football player.This is fanpage voting page vote via using{" "}
           <b>testnet</b>.
         </div>
         <div className="bio">Rules: Unlimited voting, get to clicking!</div>
@@ -261,6 +313,19 @@ function App() {
                     </div>
                     <button className="mathButton" onClick={addC2}>
                       {voteState2}
+                    </button>
+                  </div>
+                  <div className="song-card">
+                    <div className="title">Kylian Mbappe</div>
+                    <div className="count">{Count3}</div>
+                    <div className="likes-dislikes">
+                      <img className="icon" src={likeIcon} alt="Like" onClick={() => setLikes3(likes3 + 1)} />
+                      <span>{likes3}</span>
+                      <img className="icon" src={dislikeIcon} alt="Dislike" onClick={() => setDislikes3(dislikes3 + 1)} />
+                      <span>{dislikes3}</span>
+                    </div>
+                    <button className="mathButton" onClick={addC3}>
+                      {voteState3}
                     </button>
                   </div>
                 </div>
