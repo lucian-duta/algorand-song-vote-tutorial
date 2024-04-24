@@ -6,7 +6,8 @@ import os
 def approval_program():
     handle_creation = Seq(
         App.globalPut(Bytes("Count1"), Int(0)),
-        App.globalPut(Bytes("Count2"), Int(1)),
+        App.globalPut(Bytes("Count2"), Int(0)),
+        App.globalPut(Bytes("Count3"), Int(0)),
         Return(Int(1))
     )
     # handle creation function above
@@ -27,6 +28,11 @@ def approval_program():
         App.globalPut(Bytes("Count2"), scratchCount.load() + Int(1)),
         Return(Int(1))
     )
+    addC3 = Seq(
+        scratchCount.store(App.globalGet(Bytes("Count3"))),
+        App.globalPut(Bytes("Count3"), scratchCount.load() + Int(1)),
+        Return(Int(1))
+    )
     deduct = Seq([
         scratchCount.store(App.globalGet(Bytes("Count"))),
         If(scratchCount.load() > Int(0),
@@ -39,7 +45,8 @@ def approval_program():
         Assert(Global.group_size() == Int(1)),
         Cond(
             [Txn.application_args[0] == Bytes("AddC1"), addC1],
-            [Txn.application_args[0] == Bytes("AddC2"), addC2]
+            [Txn.application_args[0] == Bytes("AddC2"), addC2],
+            [Txn.application_args[0] == Bytes("AddC3"), addC3]
         )
     )
     # conditional below

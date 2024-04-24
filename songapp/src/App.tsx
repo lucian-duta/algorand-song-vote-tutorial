@@ -23,6 +23,9 @@ function App() {
   const [dislikes2, setDislikes2] = useState(faker.datatype.number());
   const [likes3, setLikes3] = useState(faker.datatype.number());
   const [dislikes3, setDislikes3] = useState(faker.datatype.number());
+  const [startTime, setStartTime] = useState<Date | null>(null);
+  const [endTime, setEndTime] = useState<Date | null>(null);
+  const [timerRunning, setTimerRunning] = useState(false);
 
   const peraWallet = new PeraWalletConnect({
     // Default chainId is "4160"
@@ -31,7 +34,7 @@ function App() {
   });
 
   // CHANGE THIS TO YOUR APP ID
-  const app_address: number = 646489223;
+  const app_address: number =  648285672;
   // CHANGE THIS TO YOUR APP ID
 
   const baseServer = "https://testnet-api.algonode.cloud";
@@ -226,6 +229,19 @@ function App() {
     console.log("Count3: ", globalState[2]["value"]["uint"]);
     setCount3(globalState[2]["value"]["uint"]);
   };
+  const startTimer = () => {
+    setStartTime(new Date());
+    const endTime = new Date();
+    endTime.setMinutes(endTime.getMinutes() + 2); // Set end time to 2 minutes from now
+    setEndTime(endTime);
+    setTimerRunning(true);
+  };
+
+  const stopTimer = () => {
+    setStartTime(null);
+    setEndTime(null);
+    setTimerRunning(false);
+  };
 
   useEffect(() => {
     // Reconnect to the session when the component is mounted
@@ -257,6 +273,17 @@ function App() {
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">FAVOURITE PLAYER VOTING </div>
+        <div className="timer">
+          {timerRunning && (
+            <>
+              <div>Timer: {endTime && endTime.toLocaleTimeString()}</div>
+              <button onClick={stopTimer}>Stop Timer</button>
+            </>
+          )}
+          {!timerRunning && (
+            <button onClick={startTimer}>Start Timer</button>
+          )}
+        </div>
         <div className="bio">
           Vote for your favourite football player.This is fanpage voting page vote via using{" "}
           <b>testnet</b>.

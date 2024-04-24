@@ -19,7 +19,7 @@ return compiledBytes;
 try {
 const localInts = 0;
 const localBytes = 0;
-const globalInts = 2;
+const globalInts = 3;
 const globalBytes = 0;
 const approvalProgramfile = await open(
 "./contracts/artifacts/songvote_approval.teal"

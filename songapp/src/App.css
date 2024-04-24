@@ -224,3 +224,29 @@
   margin-right: 12px;
   text-decoration: underline #df5e48;
 }
+.timer {
+  margin-top: 20px;
+}
+
+.timer button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.timer button:hover {
+  background-color: #45a049;
+}
+
+.timer button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
