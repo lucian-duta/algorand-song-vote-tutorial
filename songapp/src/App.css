@@ -73,7 +73,7 @@
   margin: 0px;
   padding: 25px;
   border-radius: 8px;
-  background: #29344b;
+  background: #14aab1;
   align-items: center;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .header {
-  color: #df5e48;
+  color: #61840a;
   text-align: center;
   font-size: 40px;
   font-weight: 600;
@@ -125,7 +125,7 @@
   border-radius: 5px;
   margin-bottom: 16px;
   width: 70%;
-  background-color: #df5e48;
+  background-color: #d41717;
   color: whitesmoke;
   font-size: 18px;
 }
@@ -157,17 +157,31 @@
   font-size: 22px;
   margin-top: 12px;
   margin-bottom: 12px;
-  color: white;
+  color: black;
   text-align: center;
 }
 
 .count {
-  color: whitesmoke;
+  color: black;
   font-size: 50px;
   border-radius: 8px;
   width: 35%;
   text-align: center;
   position: relative;
+}
+.likes-dislikes {
+  display: flex;
+  align-items: center;
+}
+
+.likes-dislikes img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.likes-dislikes span {
+  color: #000; /* Black color for the count */
 }
 
 .songs-container {
@@ -187,7 +201,7 @@
     width: -webkit-fill-available;
     text-align: center;
     padding: 9px;
-    background-color: #1d2535f8;
+    background-color: #fffffff8;
     border-radius: 8px;
     justify-items: center;
     justify-content: center;

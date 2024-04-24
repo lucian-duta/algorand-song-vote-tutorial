@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import algosdk from "algosdk";
 import { Buffer } from "buffer";
 import { PeraWalletConnect } from "@perawallet/connect";
+import {faker} from '@faker-js/faker';
 
 import "./App.css";
+import likeIcon from "./assets/like.png";
+import dislikeIcon from "./assets/dislike.png";
 
 function App() {
   const [currentAccount, setCurrentAccount] = useState<string | null>();
@@ -11,7 +14,11 @@ function App() {
   const [voteState2, setVoteState2] = useState("Vote");
   const [Count1, setCount1] = useState(0);
   const [Count2, setCount2] = useState(0);
-  const [walletbalance, setwalletbalance] = useState<number>(0);
+  const [walletbalance, setWalletBalance] = useState<number>(0);
+  const [likes1, setLikes1] = useState(faker.datatype.number());
+  const [dislikes1, setDislikes1] = useState(faker.datatype.number());
+  const [likes2, setLikes2] = useState(faker.datatype.number());
+  const [dislikes2, setDislikes2] = useState(faker.datatype.number());
 
   const peraWallet = new PeraWalletConnect({
     // Default chainId is "4160"
@@ -154,7 +161,7 @@ function App() {
       "Account Balance in Algo:",
       algosdk.microalgosToAlgos(accountinfo.amount)
     );
-    setwalletbalance(algosdk.microalgosToAlgos(accountinfo.amount));
+    setWalletBalance(algosdk.microalgosToAlgos(accountinfo.amount));
   };
 
   const getCount = async () => {
@@ -197,9 +204,9 @@ function App() {
   return (
     <div className="mainContainer">
       <div className="dataContainer">
-        <div className="header">🎧︎ What kind of music do you like?</div>
+        <div className="header">FAVOURITE PLAYER VOTING </div>
         <div className="bio">
-          Vote for the better music genre. Ensure your wallet is set to the{" "}
+          Vote for your favourite football player.This is fanpage voting vote via using{" "}
           <b>testnet</b>.
         </div>
         <div className="bio">Rules: Unlimited voting, get to clicking!</div>
@@ -231,15 +238,27 @@ function App() {
               <>
                 <div className="songs-container">
                   <div className="song-card">
-                    <div className="title">EDM</div>
+                    <div className="title">Cristiano Ronaldo</div>
                     <div className="count">{Count1}</div>
+                    <div className="likes-dislikes">
+                      <img className="icon" src={likeIcon} alt="Like" onClick={() => setLikes1(likes1 + 1)} />
+                      <span>{likes1}</span>
+                      <img className="icon" src={dislikeIcon} alt="Dislike" onClick={() => setDislikes1(dislikes1 + 1)} />
+                      <span>{dislikes1}</span>
+                    </div>
                     <button className="mathButton" onClick={addC1}>
                       {voteState1}
                     </button>
                   </div>
                   <div className="song-card">
-                    <div className="title">Pop</div>
+                    <div className="title">Lionel Messi</div>
                     <div className="count">{Count2}</div>
+                    <div className="likes-dislikes">
+                      <img className="icon" src={likeIcon} alt="Like" onClick={() => setLikes2(likes2 + 1)} />
+                      <span>{likes2}</span>
+                      <img className="icon" src={dislikeIcon} alt="Dislike" onClick={() => setDislikes2(dislikes2 + 1)} />
+                      <span>{dislikes2}</span>
+                    </div>
                     <button className="mathButton" onClick={addC2}>
                       {voteState2}
                     </button>

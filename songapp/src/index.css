@@ -5,8 +5,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  background-color: #2c3e50; /* Football pitch green */
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -16,53 +16,54 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: #721106; /* Red for warning or errors */
+  text-decoration: none;
 }
 a:hover {
-  color: #535bf2;
+  color: #c0392b; /* Darker red on hover */
 }
 
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #dcb412; /* Gold for headings */
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: none; /* Remove border */
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #168c45; /* Blue for primary action */
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #2980b9; /* Darker blue on hover */
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none; /* Remove focus outline */
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #2c3e50; /* Dark blue for text on light background */
+    background-color: #ecf0f1; /* Light gray background */
   }
   a:hover {
-    color: #747bff;
+    color: #e74c3c; /* Red on hover */
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #f1c40f; /* Gold button on light background */
   }
 }
 
 body {
-  background: url('../src/assets/jack-b-SxhNnU46jAc-unsplash.jpg');
+  background: url('../src/assets/image.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   height:100vh;

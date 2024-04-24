@@ -1,7 +1,7 @@
 import dotenv from "dotenv"; 
 import algosdk from "algosdk"; 
 dotenv.config();  
-let myaccount = algosdk.mnemonicToSecretKey("imitate brief urban business taste favorite favorite evil attitude sauce goat forward pottery rescue obey clever afford join click duty person evil cinnamon abstract title");
+let myaccount = algosdk.mnemonicToSecretKey("staff coast assault fortune eyebrow party visual december basic across skull cancel actress sphere artist custom deposit display photo region agent furnace coral ability rule");
 const baseServer = "https://testnet-api.algonode.cloud"; 
 const algodClient = new algosdk.Algodv2("", baseServer, ""); 
 // This variable is our client. It is the link between our code and the blockchain 
