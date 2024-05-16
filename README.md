@@ -65,6 +65,10 @@ npm run dev
 ```
 
 
+@Author
+Manav Patel
+
+
 
 
 
